@@ -15,6 +15,7 @@ import functools
 from dsm import defaults, import_processor
 from dsm.util import main_for_demo
 from dsm.keyed_vectors import demo_kv
+from dsm.import_processor import extractor
 
 
 def main(argv=None):
@@ -24,8 +25,9 @@ def main(argv=None):
 def run(verbose=False):
 
     extractor_pool = Pool(processes=defaults.PROCESSES)
-    process_func = functools.partial(import_processor.process(demo_kv))
-    for ob in extractor_pool.imap(process_func,
+    ext = extractor(demo_kv)
+    #process_func = functools.partial(import_processor.process(demo_kv))
+    for ob in extractor_pool.imap(ext.process,
                                   range(defaults.OBSERVATIONS)):
         if verbose:
             sys.stderr.write(".")
