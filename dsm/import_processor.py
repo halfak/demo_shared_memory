@@ -1,9 +1,8 @@
 from . import defaults
-from .keyed_vectors import demo_kv
 from .util import generate_zero_vector
 
 
-def process(_):
+def process(demo_kv, _):
     sum_vector = generate_zero_vector()
     for i in range(defaults.WORDS):
         vector = demo_kv[str(i)]
